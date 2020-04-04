@@ -16,7 +16,7 @@ with open('dblps.json', 'r') as infile:
             print (name,data['authors'].index(name)+1 , 1)
             
 
-#cat ~/input | ./mapper.py | \sort | ./reducer.py
+
     
     
 
