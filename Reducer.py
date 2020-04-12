@@ -11,15 +11,18 @@ import sys
 
 current_word = None
 current_count = 0
+current_pos = 0
 word = None
 
 # input comes from STDIN
-for line in open('untitled.txt',encoding = 'utf-8'):
+for line in sys.stdin:
     # remove leading and trailing whitespace
     line = line.strip()
+    line = line.replace('(', "")
+    line = line.replace(')', "")
 
     # parse the input we got from mapper.py
-    word, pos, count = line.split("'",3)
+    word, pos, count = line.split(",",2)
 
     
 
@@ -34,7 +37,7 @@ for line in open('untitled.txt',encoding = 'utf-8'):
 
     # this IF-switch only works because Hadoop sorts map output
     # by key (here: word) before it is passed to the reducer
-    if current_word == word:
+    if (current_word == word and current_pos == pos):
         current_count += count
     else:
         if current_word:
@@ -42,19 +45,12 @@ for line in open('untitled.txt',encoding = 'utf-8'):
             print('%s\t%s\t%s' % (current_word,pos, current_count))
         current_count = count
         current_word = word
+        current_pos = pos
 
 # do not forget to output the last word if needed!
-if current_word == word:
-    print('%s\t%s\t%s' % (current_word,pos, current_count))
+if (current_word == word ):
+    print('%s\t%s\t%s' % (current_word,current_pos, current_count))
 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
 
 
 
