@@ -10,7 +10,7 @@ import sys
 import json
 
 # input comes from STDIN (standard input)
-for line in open('dblp-ref-0.json'):
+for line in sys.stdin:
     newLine = json.loads(line)
     
     for key,value in newLine.items():
@@ -20,13 +20,6 @@ for line in open('dblp-ref-0.json'):
     
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
 
 
 
